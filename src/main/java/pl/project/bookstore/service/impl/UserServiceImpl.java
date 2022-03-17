@@ -1,6 +1,7 @@
 package pl.project.bookstore.service.impl;
 
 import org.springframework.stereotype.Service;
+import pl.project.bookstore.exception.UserNotFoundEXception;
 import pl.project.bookstore.model.User;
 import pl.project.bookstore.repository.UserRepository;
 import pl.project.bookstore.service.UserService;
@@ -17,8 +18,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
-        return userRepository.findById(id).orElseThrow(null);
+    public User getUserById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundEXception("User by id " + id + " was not found"));
     }
 
     @Override
@@ -32,8 +34,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user, long id) {
-        User userFromDB = userRepository.findById(id).orElseThrow(null);
+    public User updateUser(User user, Long id) {
+        User userFromDB = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundEXception("User by id " + id + " was not found"));
         userFromDB.setId(user.getId());
         userFromDB.setLogin(user.getLogin());
         userFromDB.setPassword(user.getPassword());
@@ -41,8 +44,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(long id) {
-        User userFromDB = userRepository.findById(id).orElseThrow(null);
+    public void deleteUser(Long id) {
+        User userFromDB = userRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundEXception("User by id " + id + " was not found"));
         userRepository.delete(userFromDB);
     }
 }

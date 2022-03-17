@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long bookId;
+    private Long bookId;
     private String title;
     private String author;
 

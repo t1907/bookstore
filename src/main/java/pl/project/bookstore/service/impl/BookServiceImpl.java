@@ -3,6 +3,8 @@ package pl.project.bookstore.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.project.bookstore.exception.BookNotFoundEXception;
+import pl.project.bookstore.exception.UserNotFoundEXception;
 import pl.project.bookstore.model.Book;
 import pl.project.bookstore.repository.BookRepository;
 import pl.project.bookstore.service.BookService;
@@ -24,8 +26,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getBookById(long id) {
-        return bookRepository.findById(id).orElseThrow();
+    public Book getBookById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundEXception("Book by id " + id + " was not found"));
+
     }
 
     @Override
@@ -34,8 +38,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book updateBookById(Book book, long id) {
-        Book bookFromDB = bookRepository.findById(id).orElseThrow();
+    public Book updateBookById(Book book, Long id) {
+        Book bookFromDB = bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundEXception("Book by id " + id + " was not found"));
         bookFromDB.setBookId(book.getBookId());
         bookFromDB.setTitle(book.getTitle());
         bookFromDB.setAuthor(book.getAuthor());
@@ -44,8 +49,9 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public void deleteBookById(long id) {
-        bookRepository.findById(id).orElseThrow();
+    public void deleteBookById(Long id) {
+        bookRepository.findById(id)
+                .orElseThrow(() -> new BookNotFoundEXception("Book by id " + id + " was not found"));
         bookRepository.deleteById(id);
     }
 }

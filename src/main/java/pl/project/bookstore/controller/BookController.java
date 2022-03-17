@@ -26,23 +26,22 @@ public class BookController {
 
     @GetMapping("/book/get/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable long id) {
-        Book book = bookService.getBookById(id);
-        return new ResponseEntity<Book>(book, HttpStatus.OK);
+        return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
     }
 
     @PostMapping("/book/add")
     public ResponseEntity<Book> saveBook(@RequestBody Book book){
-        return new ResponseEntity<Book>(bookService.saveBook(book), HttpStatus.CREATED);
+        return new ResponseEntity<>(bookService.saveBook(book), HttpStatus.CREATED);
     }
 
     @PutMapping("/book/update/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable long id, @RequestBody Book book){
-        return new ResponseEntity<Book>(bookService.updateBookById(book, id), HttpStatus.OK);
+    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book book){
+        return new ResponseEntity<>(bookService.updateBookById(book, id), HttpStatus.OK);
     }
 
     @DeleteMapping("book/delete/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable long id){
+    public ResponseEntity<String> deleteBook(@PathVariable Long id){
         bookService.deleteBookById(id);
-        return new ResponseEntity<String>("Książka została usunięta", HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
