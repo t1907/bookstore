@@ -1,7 +1,6 @@
 package pl.project.bookstore.controller;
 
-import org.hibernate.ObjectNotFoundException;
-import org.hibernate.annotations.NotFound;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +8,7 @@ import pl.project.bookstore.model.Book;
 import pl.project.bookstore.service.BookService;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 public class BookController {
