@@ -3,14 +3,13 @@ package pl.project.bookstore.model;
 import lombok.*;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class User implements Serializable {
+public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
