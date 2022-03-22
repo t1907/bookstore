@@ -49,4 +49,10 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
         userRepository.delete(userFromDB);
     }
+
+    @Override
+    public User loginUser(String login) {
+        User userToLogin = userRepository.findByLogin(login);
+        return new User(userToLogin.getId(), userToLogin.getLogin(), userToLogin.getPassword());
+    }
 }
