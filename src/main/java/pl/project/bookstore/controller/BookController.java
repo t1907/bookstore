@@ -11,7 +11,6 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin
 public class BookController {
 
     private final BookService bookService;
@@ -21,8 +20,8 @@ public class BookController {
     }
 
     @GetMapping("/books")
-    public List<Book> getBooks(){
-        return bookService.getAllBooks();
+    public ResponseEntity<List<Book>> getBooks(){
+        return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
     }
 
     @GetMapping("/book/get/{id}")

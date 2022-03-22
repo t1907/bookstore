@@ -9,7 +9,6 @@ import pl.project.bookstore.service.UserService;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 public class UserController {
 
     private final UserService userService;
