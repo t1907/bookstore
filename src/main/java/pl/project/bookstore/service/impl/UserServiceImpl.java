@@ -7,6 +7,7 @@ import pl.project.bookstore.repository.UserRepository;
 import pl.project.bookstore.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(Long id) {
+    public User getUserById(UUID id) {
         return userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
     }
@@ -34,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUser(User user, Long id) {
+    public User updateUser(User user, UUID id) {
         User userFromDB = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
         userFromDB.setId(user.getId());
@@ -44,7 +45,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(UUID id) {
         User userFromDB = userRepository.findById(id)
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found"));
         userRepository.delete(userFromDB);

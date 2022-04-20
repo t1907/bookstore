@@ -7,8 +7,11 @@ import pl.project.bookstore.model.User;
 import pl.project.bookstore.service.UserService;
 
 import java.util.List;
+import java.util.UUID;
 
+@CrossOrigin
 @RestController
+@RequestMapping("api/")
 public class UserController {
 
     private final UserService userService;
@@ -23,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/user/get/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id){
+    public ResponseEntity<User> getUserById(@PathVariable UUID id){
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
     }
 
@@ -33,12 +36,12 @@ public class UserController {
     }
 
     @PutMapping(value = "/user/update/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody User user){
         return new ResponseEntity<>(userService.updateUser(user, id), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/user/delete/{id}")
-    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+    public ResponseEntity<User> deleteUser(@PathVariable UUID id){
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
